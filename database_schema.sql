@@ -13,3 +13,5 @@ create table post(
     tulisan varchar(12),
     user_id int(),
 );
+
+insert into user (nama, telepon) values ("kevin", "3232323232");
