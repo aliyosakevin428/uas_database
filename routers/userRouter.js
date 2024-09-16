@@ -8,7 +8,7 @@ userRouter.get("/", async (req, res) => {
   res.json({ message: "ini dari route user", users: result });
 });
 
-userRouter.get("/:userid", async (req, res) => {
+userRouter.get("/:userId", async (req, res) => {
   const userId = req.params.userId;
   const [result, response] = await database.execute(
     "SELECT * FROM user WHERE id = ?",
@@ -17,14 +17,14 @@ userRouter.get("/:userid", async (req, res) => {
   res.json({
     userId: userId,
     user: result[0],
-    message: "id user yang di tangkap adalah" + userId,
+    message: `detail user dengan id ${userId}`,
   });
 });
 
 userRouter.post("/", async (req, res) => {
   const { nama, telepon } = req.body;
   const [result, response] = await database.execute(
-    "INSERT INTO user (nama, telepon) VALUES (?.?)",
+    "INSERT INTO user (nama, telepon) VALUES (?,?)",
     [nama, telepon]
   );
 
@@ -38,7 +38,7 @@ userRouter.delete("/:userId", async (req, res) => {
     [userId]
   );
 
-  res.json({ message: "user berhasil di hapus", result });
+  res.json({ message: "user berhasil dihapus", result });
 });
 
 export default userRouter;
