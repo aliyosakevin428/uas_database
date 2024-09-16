@@ -5,7 +5,7 @@ const userRouter = express.Router();
 
 userRouter.get("/", async (req, res) => {
   const [result, response] = await database.execute("SELECT * FROM user");
-  res.json({ message: "ini dari router", users: result });
+  res.json({ message: "ini dari route user", users: result });
 });
 
 userRouter.get("/:userid", async (req, res) => {
@@ -25,10 +25,20 @@ userRouter.post("/", async (req, res) => {
   const { nama, telepon } = req.body;
   const [result, response] = await database.execute(
     "INSERT INTO user (nama, telepon) VALUES (?.?)",
-    [nama, telepon],
+    [nama, telepon]
   );
 
   res.json({ message: "user berhasil ditambahkan", result });
+});
+
+userRouter.delete("/:userId", async (req, res) => {
+  const userId = req.params.userId;
+  const [result, response] = await database.execute(
+    "DELETE FROM user WHERE id = ?",
+    [userId]
+  );
+
+  res.json({ message: "user berhasil di hapus", result });
 });
 
 export default userRouter;
