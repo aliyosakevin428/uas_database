@@ -3,6 +3,7 @@ import database from "../config/database.js";
 
 const userRouter = express.Router();
 
+//Routes for User
 userRouter.get("/", async (req, res) => {
   const [result, response] = await database.execute("SELECT * FROM user");
   res.json({ message: "ini dari route user", users: result });
@@ -21,7 +22,7 @@ userRouter.get("/:userId", async (req, res) => {
   });
 });
 
-userRouter.post("/", async (req, res) => {
+userRouter.post("/user", async (req, res) => {
   const { nama, telepon } = req.body;
   const [result, response] = await database.execute(
     "INSERT INTO user (nama, telepon) VALUES (?,?)",
