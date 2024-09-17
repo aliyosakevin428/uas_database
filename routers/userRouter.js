@@ -22,7 +22,7 @@ userRouter.get("/:userId", async (req, res) => {
   });
 });
 
-userRouter.post("/user", async (req, res) => {
+userRouter.post("/", async (req, res) => {
   const { nama, telepon } = req.body;
   const [result, response] = await database.execute(
     "INSERT INTO user (nama, telepon) VALUES (?,?)",
