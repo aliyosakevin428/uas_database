@@ -21,8 +21,9 @@ postRouter.get("/:postId", async (req, res) => {
   });
 });
 
-postRouter.post("/post", async (req, res) => {
+postRouter.post("/", async (req, res) => {
   const { judul, tulisan, user_id } = req.body;
+  console.log(req.body);
   const [result, response] = await database.execute(
     "INSERT INTO post (judul, tulisan, user_id) VALUES (?,?,?)",
     [judul, tulisan, user_id]
