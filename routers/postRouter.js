@@ -3,6 +3,7 @@ import database from "../config/database.js";
 
 const postRouter = express.Router();
 
+//routes for post 
 postRouter.get("/", async (req, res) => {
   const [result, response] = await database.execute("SELECT * FROM post");
   res.json({ message: "ini dari route post", users: result });
